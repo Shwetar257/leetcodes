@@ -1,0 +1,31 @@
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        int ans=0,l=0,r=0,n=s.size();
+        for(int i=0; i<n; i++)
+        {
+            int j=i+1, k=i-1;
+            while(j<n && k>=0 && s[j]==s[k])   //checking odd length palindromes
+                j++,k--;
+            j--;k++;
+            if(ans<j-k+1)
+                ans=j-k+1,l=k,r=j;
+            
+            j=i+1, k=i;
+            while(j<n && k>=0 && s[j]==s[k])    //checking even length palindromes having middle elements as s[i] and s[i+1]
+			j++,k--;
+            j--;k++;
+            if(ans<j-k+1)
+                ans=j-k+1,l=k,r=j;
+            
+            j=i, k=i-1;
+            while(j<n && k>=0 && s[j]==s[k])     //checking even length palindromes having middle elements as s[i-1] and s[i]
+                j++,k--;
+            j--;k++;
+            if(ans<j-k+1)
+                ans=j-k+1,l=k,r=j;
+        }
+        return s.substr(l,r-l+1);
+        
+    }
+};
