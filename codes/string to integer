@@ -1,0 +1,70 @@
+class Solution {
+public:
+    int myAtoi(string s) {
+        int i, number = 0, sign = 1;
+        for(i = 0; i < s.size(); i++)
+        {
+            if(s[i] == ' ')
+            {
+                continue;
+            }
+            else
+            {
+                break;
+            }
+        }
+        
+        if(s[i] == '-')
+        {
+            sign = -1;
+            i++;
+        }
+        else if(s[i] == '+')
+        {
+            i++;
+        }
+        
+        int digit;
+        for(; i < s.size(); i++)
+        {
+            if(isdigit(s[i]))
+            {
+                digit = stoi(string(1, s[i]));
+                
+                if(sign == 1)
+                {
+                    double comp = (INT_MAX - digit) / 10.0;
+                    if(number <= comp)
+                    {
+                        number = number * 10 + digit;
+                    }
+                    else
+                    {
+                        return INT_MAX;
+                    }
+                }
+                else
+                {
+                    double comp = (INT_MIN + digit) / 10.0;
+                    if(number >= comp)
+                    {
+                        number = number * 10 - digit;
+                    }
+                    else
+                    {
+                        return INT_MIN;
+                    }
+                }
+            }
+            else
+            {
+                break;
+            }
+        }
+        
+        return number;
+        
+        
+        
+    }
+};
